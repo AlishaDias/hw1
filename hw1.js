@@ -56,25 +56,18 @@ const Product = class Product {
         return products.map(product => new Product(`${product.name},${(product.price / 2).toFixed(2)},${product.availability}`));
     }
 
-
-    /**
-     * *****************
-     * ***** TODO ******
-     * *****************
-     *
-     * Implement the static method printProducts below
-     *
-     * This method will accept an array of Products and will console.log all the products in the following format:
-     * Product: Apple, Cost: $1.00, Available: Yes
-     * Take note, for 'Available' we are not returning 'In Stock' or 'Out of Stock' but 'Yes' or 'No'
-     * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
-     * Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat (currency formatting)
-     */
-        static printProducts = (products) => {
-        
-        }
-
-
+    static printProducts = (products) => {
+        products.forEach((product) => {
+            const formattedPrice = new Intl.NumberFormat('us-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(product.price);
+    
+            const availability = product.availability === 'In Stock' ? 'Yes' : 'No';
+    
+            console.log(`Product: ${product.name}, Cost: ${formattedPrice}, Availability: ${availability}`);
+        });
+    }
     };
 
 
